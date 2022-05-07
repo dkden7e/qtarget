@@ -440,7 +440,16 @@ local function EnableTarget()
 					end
 				else sleep += 20 end
 			else LeaveTarget() DrawOutlineEntity(entity, false) end
-		else sleep += 20 end
+		else
+			--[[SetupOptions( { ["Open Radialmenu"] = { icon = "fas fa-podcast", label = "Abrir menú radial", action = function() print("cambiar esto por realmente abrir el menú radial") end } }, -1, 0, true)
+			SendNUIMessage({response = 'validTarget', data = nuiData })
+			EnableNUI()
+			success = true
+			while targetActive do
+				Citizen.Wait(100)
+			end]]
+			sleep += 20
+		end
 		Wait(sleep)
 	end
 	DisableTarget(false)
