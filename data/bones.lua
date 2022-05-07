@@ -42,9 +42,13 @@ if Config.EnableDefaultOptions then
         [`tyrant`] = true
     }
 
+    local function isVehicleDoorOpen(vehicle, door)
+       return (GetVehicleDoorAngleRatio(vehicle, door) > 0.0)
+    end
+
 	local function ToggleDoor(vehicle, door)
 		if GetVehicleDoorLockStatus(vehicle) ~= 2 then
-			if GetVehicleDoorAngleRatio(vehicle, door) > 0.0 then
+			if isVehicleDoorOpen(vehicle, door) then
 				SetVehicleDoorShut(vehicle, door, false)
 			else
 				SetVehicleDoorOpen(vehicle, door, false)
@@ -55,79 +59,101 @@ if Config.EnableDefaultOptions then
     Bones.Options['seat_dside_f'] = {
         ["Toggle Front Door"] = {
             icon = "fas fa-door-open",
-            label = "Toggle Front Door",
+            label = "Abrir/cerrar puerta delantera (I)",
             canInteract = function(entity)
                 return GetEntityBoneIndexByName(entity, 'door_dside_f') ~= -1
             end,
             action = function(entity)
                 ToggleDoor(entity, 0)
             end,
-            distance = 1.2
+            distance = 1.3
         }
     }
 
     Bones.Options['seat_pside_f'] = {
         ["Toggle Front Door"] = {
             icon = "fas fa-door-open",
-            label = "Toggle Front Door",
+            label = "Abrir/cerrar puerta delantera (D)",
             canInteract = function(entity)
                 return GetEntityBoneIndexByName(entity, 'door_pside_f') ~= -1
             end,
             action = function(entity)
                 ToggleDoor(entity, 1)
             end,
-            distance = 1.2
+            distance = 1.3
         }
     }
 
     Bones.Options['seat_dside_r'] = {
         ["Toggle Rear Door"] = {
             icon = "fas fa-door-open",
-            label = "Toggle Rear Door",
+            label = "Abrir/cerrar puerta trasera (D)",
             canInteract = function(entity)
                 return GetEntityBoneIndexByName(entity, 'door_dside_r') ~= -1
             end,
             action = function(entity)
                 ToggleDoor(entity, 2)
             end,
-            distance = 1.2
+            distance = 1.3
         }
     }
 
     Bones.Options['seat_pside_r'] = {
         ["Toggle Rear Door"] = {
             icon = "fas fa-door-open",
-            label = "Toggle Rear Door",
+            label = "Abrir/cerrar puerta trasera (I)",
             canInteract = function(entity)
                 return GetEntityBoneIndexByName(entity, 'door_pside_r') ~= -1
             end,
             action = function(entity)
                 ToggleDoor(entity, 3)
             end,
-            distance = 1.2
+            distance = 1.3
         }
     }
 
     Bones.Options['bonnet'] = {
         ["Toggle Hood"] = {
             icon = "fa-duotone fa-engine",
-            label = "Toggle Hood",
+            label = "Abrir/cerrar capó",
             action = function(entity)
                 ToggleDoor(entity, BackEngineVehicles[GetEntityModel(entity)] and 5 or 4)
             end,
-            distance = 0.9
-        }
+            distance = 1.1
+        },
+        --["Hide Trunk"] = {
+        --    icon = "fas fa-truck-ramp-box",
+        --    label = "Esconderte en el maletero",
+        --    canInteract = function(entity)
+        --        return BackEngineVehicles[GetEntityModel(entity)] ~= nil
+        --    end,
+        --    action = function(entity)
+        --        ToggleDoor(entity, BackEngineVehicles[GetEntityModel(entity)] and 4 or 5)
+        --    end,
+        --    distance = 1.1
+        --},
     }
 
     Bones.Options['boot'] = {
         ["Toggle Trunk"] = {
             icon = "fas fa-truck-ramp-box",
-            label = "Toggle Trunk",
+            label = "Abrir/cerrar maletero/portón",
             action = function(entity)
                 ToggleDoor(entity, BackEngineVehicles[GetEntityModel(entity)] and 4 or 5)
             end,
-            distance = 0.9
-        }
+            distance = 1.1
+        },
+        --["Hide Trunk"] = {
+        --    icon = "fas fa-truck-ramp-box",
+        --    label = "Esconderte en el maletero",
+        --    canInteract = function(entity)
+        --        return BackEngineVehicles[GetEntityModel(entity)] ~= nil
+        --    end,
+        --    action = function(entity)
+        --        ToggleDoor(entity, BackEngineVehicles[GetEntityModel(entity)] and 4 or 5)
+        --    end,
+        --    distance = 1.1
+        --},
     }
 end
 
