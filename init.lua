@@ -54,7 +54,7 @@ Config.MenuControlKey = 237
 Config.OpenKey = 'LMENU' -- Left Alt
 
 -- Supported values: 'ESX', 'QB', false
-Config.Framework = false
+Config.Framework = "ESX"
 
 -------------------------------------------------------------------------------
 -- Functions
